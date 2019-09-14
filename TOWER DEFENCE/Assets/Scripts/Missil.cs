@@ -5,7 +5,7 @@ using UnityEngine;
 public class Missil : MonoBehaviour
 {
     private float velocidade = 3f;
-    public GameObject alvo;
+    public Inimigo alvo;
     [SerializeField] private int pontosDeDano;
 
     // Update is called once per frame
@@ -17,8 +17,12 @@ public class Missil : MonoBehaviour
 
     private void Start()
     {
-        alvo = GameObject.Find("Inimigo");
         AutoDestroiDeposDeSegundos(5f);
+    }
+
+    public void DefineAlvo(Inimigo inimigo)
+    {
+        alvo = inimigo;
     }
 
     private void AlteraDirecao()

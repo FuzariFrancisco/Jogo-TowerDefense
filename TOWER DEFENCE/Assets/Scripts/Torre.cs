@@ -10,12 +10,19 @@ public class Torre : MonoBehaviour
 
     private float momentoDoUltimoDisparo;
 
+    [SerializeField] private float raioDeAlcance;
+
     void Update()
     {
-        Atira();
+        Inimigo alvo = EscolheAlvo();
+        if(alvo != null)
+        {
+            Atira(alvo);
+        }
+        
     }
 
-    private void Atira()
+    private void Atira(Inimigo inimigo)
     {
         float tempoAtual = Time.time;
         if (tempoAtual > momentoDoUltimoDisparo + tempoDeRecarga)
@@ -23,7 +30,31 @@ public class Torre : MonoBehaviour
             momentoDoUltimoDisparo = tempoAtual;
             GameObject pontoDeDisparo = this.transform.Find("CanhaoDaTorre/PontoDeDisparo").gameObject;
             Vector3 posicaoDoPontoDeDisparo = pontoDeDisparo.transform.position;
-            Instantiate(projetilPrefab, posicaoDoPontoDeDisparo, Quaternion.identity);
+            //Instantiate(projetilPrefab, posicaoDoPontoDeDisparo, Quaternion.identity);
+            GameObject projetilObject = (GameObject)Instantiate(projetilPrefab, posicaoDoPontoDeDisparo, Quaternion.identity);
+            Missil missil = projetilObject.GetComponent<Missil>();
+            missil.DefineAlvo(inimigo);
         }
+    }
+
+    private Inimigo EscolheAlvo()
+    {
+        GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Inimigo");
+        foreach (GameObject inimigo in inimigos)
+        {
+            if (EstaNoRaioDeAlcance(inimigo))
+            {
+                return inimigo.GetComponent<Inimigo>();
+            }
+        }
+        return null;
+    }
+
+    private bool EstaNoRaioDeAlcance(GameObject inimigo)
+    {
+        Vector3 posicaoDoInimigoNoPlano = Vector3.ProjectOnPlane(inimigo.transform.position, Vector3.up);
+        Vector3 posicaoDaTorreNoPlano = Vector3.ProjectOnPlane(this.transform.position, Vector3.up);
+        float distanciaParaInimigo = Vector3.Distance(posicaoDaTorreNoPlano, posicaoDoInimigoNoPlano);
+        return distanciaParaInimigo <= raioDeAlcance;
     }
 }
