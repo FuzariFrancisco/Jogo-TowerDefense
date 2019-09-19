@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Inimigo : MonoBehaviour
 {
     [SerializeField] private int vida;
+    Jogador jogador;
 
 
     void Start()
@@ -14,6 +15,7 @@ public class Inimigo : MonoBehaviour
         GameObject FimDoCaminho = GameObject.Find("FimDoCaminho");
         Vector3 posicaoFimDoCaminho = FimDoCaminho.transform.position;
         agente.SetDestination(posicaoFimDoCaminho);
+        jogador = GameObject.FindObjectOfType(typeof(Jogador)) as Jogador;
     }
 
     public void RecebeDano(int pontosDeDano)
@@ -21,7 +23,9 @@ public class Inimigo : MonoBehaviour
         vida -= pontosDeDano;
         if(vida <+0)
         {
+            
             Destroy(this.gameObject);
+            jogador.BonusUp();
         }
     }
 

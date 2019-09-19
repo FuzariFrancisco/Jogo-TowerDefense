@@ -60,10 +60,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BonusMostrador.cs" />
+    <Compile Include="Assets\Scripts\DetectorDeCruzamento.cs" />
     <Compile Include="Assets\Scripts\GeradorDeInimigo.cs" />
     <Compile Include="Assets\Scripts\Inimigo.cs" />
+    <Compile Include="Assets\Scripts\Jogador.cs" />
     <Compile Include="Assets\Scripts\Jogo.cs" />
     <Compile Include="Assets\Scripts\Missil.cs" />
+    <Compile Include="Assets\Scripts\MostradorDeVida.cs" />
     <Compile Include="Assets\Scripts\Torre.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/francisco.hsfsouza/Documents/Projetos/Jogo-TowerDefense/TOWER DEFENCE/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

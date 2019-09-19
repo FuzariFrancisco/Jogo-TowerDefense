@@ -105,8 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920f29ec2e6276e4795b94bca43c6a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alvo: {fileID: 0}
+  alvo: {fileID: 2081365084325905570, guid: cfea06f7e3f385a44afd85cde4b38dc0, type: 3}
   pontosDeDano: 3
+  jogador: {fileID: 0}
 --- !u!54 &2203580227386350576
 Rigidbody:
   m_ObjectHideFlags: 0

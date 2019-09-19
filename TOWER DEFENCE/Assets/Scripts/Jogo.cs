@@ -6,12 +6,26 @@ public class Jogo : MonoBehaviour
 {
 
     [SerializeField] private GameObject torrePrefab;
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private Jogador jogador;
+
+    private void Start()
+    {
+        gameOver.SetActive(false);
+    }
 
     void Update()
     {
-        if (ClicouComBotaoPrimario())
+        if (JogoAcabou())
         {
-            ConstruirTorre();
+            gameOver.SetActive(true);
+        }
+        else
+        {
+            if (ClicouComBotaoPrimario())
+            {
+                ConstruirTorre();
+            }
         }
     }
 
@@ -40,5 +54,10 @@ public class Jogo : MonoBehaviour
         Physics.Raycast(raio, out elementoAtingidoPeloRaio, comprimentoMaximoDoRaio);
 
         return elementoAtingidoPeloRaio;
+    }
+
+    public void RecomecaJogo()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
